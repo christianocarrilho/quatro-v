@@ -1,4 +1,4 @@
-package org.sparrow.study.quatrov.core.outgoing.pedido;
+package org.sparrow.study.quatrov.usecase.pedido;
 
 import org.sparrow.study.quatrov.core.domain.Pedido;
 

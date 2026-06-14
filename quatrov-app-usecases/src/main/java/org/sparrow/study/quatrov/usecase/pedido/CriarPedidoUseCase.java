@@ -1,4 +1,4 @@
-package org.sparrow.study.quatrov.core.incoming.pedido;
+package org.sparrow.study.quatrov.usecase.pedido;
 
 import java.math.BigDecimal;
 import org.sparrow.study.quatrov.core.domain.Pedido;

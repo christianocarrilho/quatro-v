@@ -1,10 +1,10 @@
-package org.sparrow.study.quatrov.usecase.pedido;
+package org.sparrow.study.quatrov.usecase.pedido.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.sparrow.study.quatrov.core.domain.Pedido;
-import org.sparrow.study.quatrov.core.incoming.pedido.CriarPedidoUseCase;
-import org.sparrow.study.quatrov.core.outgoing.pedido.PedidoEventPublisher;
+import org.sparrow.study.quatrov.usecase.pedido.PedidoEventPublisher;
+import org.sparrow.study.quatrov.usecase.pedido.CriarPedidoUseCase;
 
 /**
  *

@@ -9,7 +9,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.sparrow.study.quatrov.core.domain.Pedido;
-import org.sparrow.study.quatrov.core.incoming.pedido.CriarPedidoUseCase;
+import org.sparrow.study.quatrov.usecase.pedido.CriarPedidoUseCase;
 import org.sparrow.study.quatrov.messaging.inbound.request.PedidoRequest;
 
 /**

@@ -2,14 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.sparrow.study</groupId>
-    <artifactId>quatro-v</artifactId>
+    <artifactId>quatrov</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <name>quatrov</name>
+
     <modules>
-        <module>quatro-v-core</module>
-        <module>quatro-v-usecase</module>
-        <module>quatro-v-service</module>
+        <module>quatrov-domain-core</module>
+        <module>quatrov-app-usecases</module>
+        <module>quatrov-integrations</module>
     </modules>
+
     <properties>
         <compiler-plugin.version>3.15.0</compiler-plugin.version>
         <maven.compiler.release>21</maven.compiler.release>

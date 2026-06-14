@@ -3,12 +3,29 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.sparrow.study</groupId>
-        <artifactId>quatro-v</artifactId>
+        <artifactId>quatrov</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>quatro-v-core</artifactId>
+    <artifactId>quatrov-app-usecases</artifactId>
     <packaging>jar</packaging>
+    <name>quatrov-app-usecases</name>
     <properties></properties>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>quatrov-domain-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -26,4 +43,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

@@ -3,14 +3,18 @@ package org.sparrow.study.quatrov.integrations.resource.pedido;
 import io.smallrye.common.annotation.RunOnVirtualThread;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.sparrow.study.quatrov.core.domain.Pedido;
+import java.util.UUID;
+import org.sparrow.study.quatrov.usecase.pedido.AtualizarStatusPedidoUseCase;
 import org.sparrow.study.quatrov.usecase.pedido.CriarPedidoUseCase;
 import org.sparrow.study.quatrov.usecase.pedido.dto.PedidoDTO;
+import org.sparrow.study.quatrov.usecase.pedido.request.AtualizarStatusRequest;
 
 /**
  *
@@ -24,9 +28,13 @@ public class PedidoResource {
     @Inject
     CriarPedidoUseCase criarPedidoUseCase;
 
+    @Inject
+    AtualizarStatusPedidoUseCase atualizarStatusUseCase;
+
     @POST
     @RunOnVirtualThread
     public Response criarPedido(PedidoDTO request) {
+
         PedidoDTO pedidoProcessado = criarPedidoUseCase.executar(
                 request.getClienteId(),
                 request.getItem(),
@@ -34,5 +42,14 @@ public class PedidoResource {
         );
 
         return Response.status(Response.Status.ACCEPTED).entity(pedidoProcessado).build();
+    }
+
+    @PATCH
+    @Path("/{id}/status")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response atualizarStatus(@PathParam("id") UUID id, AtualizarStatusRequest request) {
+
+        atualizarStatusUseCase.processarAlteracaoStatus(id, request.status());
+        return Response.noContent().build();
     }
 }

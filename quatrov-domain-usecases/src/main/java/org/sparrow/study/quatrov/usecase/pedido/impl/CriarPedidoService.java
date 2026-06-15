@@ -25,7 +25,6 @@ public class CriarPedidoService implements CriarPedidoUseCase {
     public PedidoDTO executar(String clienteId, String item, java.math.BigDecimal valor) {
 
         Pedido novoPedido = new Pedido(clienteId, item, valor);
-        novoPedido.validar();
 
         // grava no H2
         repositoryPort.salvar(novoPedido);

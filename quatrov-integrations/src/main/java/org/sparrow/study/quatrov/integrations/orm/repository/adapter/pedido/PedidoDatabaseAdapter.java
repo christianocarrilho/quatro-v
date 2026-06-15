@@ -1,8 +1,10 @@
-package org.sparrow.study.quatrov.integrations.service.impl;
+package org.sparrow.study.quatrov.integrations.orm.repository.adapter.pedido;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import java.util.Optional;
+import java.util.UUID;
 import org.sparrow.study.quatrov.core.domain.Pedido;
 import org.sparrow.study.quatrov.integrations.mapper.PedidoMapper;
 import org.sparrow.study.quatrov.integrations.orm.entity.pedido.PedidoEntity;
@@ -31,5 +33,17 @@ public class PedidoDatabaseAdapter implements PedidoRepository {
 
         // 2. Salva usando o poder do Panache
         panacheRepository.persist(entity);
+    }
+
+    @Override
+    public Optional<Pedido> buscarPorId(UUID id) {
+
+        PedidoEntity entity = panacheRepository.findById(id.toString());
+        Pedido pedido = null;
+
+        if (entity == null) return Optional.ofNullable(pedido);
+        pedido = pedidoMapper.toDomain(entity);
+
+        return Optional.of(pedido);
     }
 }

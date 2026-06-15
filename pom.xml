@@ -9,8 +9,8 @@
 
     <modules>
         <module>quatrov-domain-core</module>
-        <module>quatrov-app-usecases</module>
         <module>quatrov-integrations</module>
+        <module>quatrov-domain-usecases</module>
     </modules>
 
     <properties>

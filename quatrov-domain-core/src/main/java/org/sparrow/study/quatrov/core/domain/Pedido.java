@@ -52,4 +52,8 @@ public class Pedido {
     public BigDecimal getValor() {
         return valor;
     }
+
+    public void validar() {
+
+    }
 }

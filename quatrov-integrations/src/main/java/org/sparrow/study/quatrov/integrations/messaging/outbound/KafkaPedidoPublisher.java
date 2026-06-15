@@ -1,4 +1,4 @@
-package org.sparrow.study.quatrov.messaging.outbound;
+package org.sparrow.study.quatrov.integrations.messaging.outbound;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

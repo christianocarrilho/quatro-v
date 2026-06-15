@@ -5,6 +5,8 @@ import jakarta.inject.Inject;
 import org.sparrow.study.quatrov.core.domain.Pedido;
 import org.sparrow.study.quatrov.usecase.pedido.PedidoEventPublisher;
 import org.sparrow.study.quatrov.usecase.pedido.CriarPedidoUseCase;
+import org.sparrow.study.quatrov.usecase.pedido.PedidoRepository;
+import org.sparrow.study.quatrov.usecase.pedido.dto.PedidoDTO;
 
 /**
  *
@@ -14,14 +16,23 @@ import org.sparrow.study.quatrov.usecase.pedido.CriarPedidoUseCase;
 public class CriarPedidoService implements CriarPedidoUseCase {
 
     @Inject
+    PedidoRepository repositoryPort;
+    
+    @Inject
     PedidoEventPublisher eventPublisher;
 
     @Override
-    public Pedido executar(String clienteId, String item, java.math.BigDecimal valor) {
+    public PedidoDTO executar(String clienteId, String item, java.math.BigDecimal valor) {
+
         Pedido novoPedido = new Pedido(clienteId, item, valor);
+        novoPedido.validar();
 
-        // Regra de negócio orquestrada pelo Core
+        // grava no H2
+        repositoryPort.salvar(novoPedido);
 
-        return novoPedido;
+        // envia para Kafka
+        eventPublisher.publicar(novoPedido);
+
+        return PedidoDTO.toDto(novoPedido);
     }
 }

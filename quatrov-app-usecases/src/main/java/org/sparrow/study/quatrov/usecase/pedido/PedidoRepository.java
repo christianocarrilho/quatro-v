@@ -1,0 +1,12 @@
+package org.sparrow.study.quatrov.usecase.pedido;
+
+import org.sparrow.study.quatrov.core.domain.Pedido;
+
+/**
+ *
+ * @author Christiano H Carrilho Lopes da Silva <csilva@detran.ms.gov.br>
+ */
+public interface PedidoRepository {
+
+    void salvar(Pedido pedido);
+}

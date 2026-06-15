@@ -1,7 +1,7 @@
 package org.sparrow.study.quatrov.usecase.pedido;
 
 import java.math.BigDecimal;
-import org.sparrow.study.quatrov.core.domain.Pedido;
+import org.sparrow.study.quatrov.usecase.pedido.dto.PedidoDTO;
 
 /**
  *
@@ -9,5 +9,5 @@ import org.sparrow.study.quatrov.core.domain.Pedido;
  */
 public interface CriarPedidoUseCase {
 
-    Pedido executar(String clienteId, String item, BigDecimal valor);
+    PedidoDTO executar(String clienteId, String item, BigDecimal valor);
 }

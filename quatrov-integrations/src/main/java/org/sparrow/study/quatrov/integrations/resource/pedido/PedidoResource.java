@@ -1,4 +1,4 @@
-package org.sparrow.study.quatrov.resource.pedido;
+package org.sparrow.study.quatrov.integrations.resource.pedido;
 
 import io.smallrye.common.annotation.RunOnVirtualThread;
 import jakarta.inject.Inject;
@@ -10,7 +10,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.sparrow.study.quatrov.core.domain.Pedido;
 import org.sparrow.study.quatrov.usecase.pedido.CriarPedidoUseCase;
-import org.sparrow.study.quatrov.messaging.inbound.request.PedidoRequest;
+import org.sparrow.study.quatrov.usecase.pedido.dto.PedidoDTO;
 
 /**
  *
@@ -26,8 +26,8 @@ public class PedidoResource {
 
     @POST
     @RunOnVirtualThread
-    public Response criarPedido(PedidoRequest request) {
-        Pedido pedidoProcessado = criarPedidoUseCase.executar(
+    public Response criarPedido(PedidoDTO request) {
+        PedidoDTO pedidoProcessado = criarPedidoUseCase.executar(
                 request.getClienteId(),
                 request.getItem(),
                 request.getValor()

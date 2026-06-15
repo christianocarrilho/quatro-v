@@ -1,22 +1,23 @@
-package org.sparrow.study.quatrov.messaging.inbound.request;
+package org.sparrow.study.quatrov.usecase.pedido.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import org.sparrow.study.quatrov.core.domain.Pedido;
 
 /**
  *
  * @author Christiano H Carrilho Lopes da Silva <csilva@detran.ms.gov.br>
  */
-public class PedidoRequest implements Serializable {
+public class PedidoDTO implements Serializable {
     
     private String clienteId;
     private String item;
     private BigDecimal valor;
 
-    public PedidoRequest() {
+    public PedidoDTO() {
     }
 
-    public PedidoRequest(String clienteId, String item, BigDecimal valor) {
+    public PedidoDTO(String clienteId, String item, BigDecimal valor) {
         this.clienteId = clienteId;
         this.item = item;
         this.valor = valor;
@@ -44,5 +45,9 @@ public class PedidoRequest implements Serializable {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public static PedidoDTO toDto(Pedido pedido) {
+        return new PedidoDTO(pedido.getClienteId(), pedido.getItem(), pedido.getValor());
     }
 }

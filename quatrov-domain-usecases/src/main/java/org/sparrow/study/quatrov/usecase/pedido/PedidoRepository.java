@@ -3,6 +3,7 @@ package org.sparrow.study.quatrov.usecase.pedido;
 import java.util.Optional;
 import java.util.UUID;
 import org.sparrow.study.quatrov.core.domain.Pedido;
+import org.sparrow.study.quatrov.core.domain.StatusPedido;
 
 /**
  *
@@ -10,7 +11,9 @@ import org.sparrow.study.quatrov.core.domain.Pedido;
  */
 public interface PedidoRepository {
 
-    void salvar(Pedido pedido);
+    void incluir(Pedido pedido);
+
+    Pedido atualizarStatus(UUID pedidoId, StatusPedido novoStatus);
 
     Optional<Pedido> buscarPorId(UUID id);
 }

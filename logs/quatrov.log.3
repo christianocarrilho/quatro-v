@@ -1,0 +1,32 @@
+2026-06-15 23:22:03,103 INFO  [io.sma.rea.mes.kafka] (Quarkus Main Thread) [TraceID: ] SRMSG18229: Configured topics for channel 'pedidos-entrada': [pedidos-recebidos]
+2026-06-15 23:22:03,105 INFO  [io.sma.rea.mes.kafka] (Quarkus Main Thread) [TraceID: ] SRMSG18214: Key deserializer omitted, using String as default
+2026-06-15 23:22:03,111 INFO  [io.sma.rea.mes.kafka] (Quarkus Main Thread) [TraceID: ] SRMSG18229: Configured topics for channel 'pedido-status-in': [pedido-status]
+2026-06-15 23:22:03,113 INFO  [io.sma.rea.mes.kafka] (Quarkus Main Thread) [TraceID: ] SRMSG18214: Key deserializer omitted, using String as default
+2026-06-15 23:22:03,128 INFO  [io.sma.rea.mes.kafka] (smallrye-kafka-producer-thread-2) [TraceID: ] SRMSG18258: Kafka producer kafka-producer-pedidos-saida, connected to Kafka brokers 'localhost:32805', is configured to write records to 'pedido-status'
+2026-06-15 23:22:03,133 INFO  [io.sma.rea.mes.kafka] (smallrye-kafka-consumer-thread-5) [TraceID: ] SRMSG18257: Kafka consumer kafka-consumer-pedido-status-in, connected to Kafka brokers 'localhost:32805', belongs to the 'quatrov-integrations' consumer group and is configured to poll records from [pedido-status]
+2026-06-15 23:22:03,133 INFO  [io.sma.rea.mes.kafka] (smallrye-kafka-consumer-thread-4) [TraceID: ] SRMSG18257: Kafka consumer kafka-consumer-pedidos-entrada, connected to Kafka brokers 'localhost:32805', belongs to the 'quatrov-integrations' consumer group and is configured to poll records from [pedidos-recebidos]
+2026-06-15 23:22:03,134 INFO  [io.quarkus] (Quarkus Main Thread) [TraceID: ] quatrov-integrations 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.36.2) started in 0.535s. Listening on: http://localhost:8080
+2026-06-15 23:22:03,134 INFO  [io.quarkus] (Quarkus Main Thread) [TraceID: ] Profile dev activated. Live Coding activated.
+2026-06-15 23:22:03,135 INFO  [io.quarkus] (Quarkus Main Thread) [TraceID: ] Installed features: [agroal, cdi, compose, hibernate-orm, hibernate-orm-panache, jdbc-h2, kafka-client, mapstruct, messaging, messaging-kafka, narayana-jta, rest, rest-jackson, servlet, smallrye-context-propagation, vertx]
+2026-06-15 23:22:03,135 INFO  [io.qua.dep.dev.RuntimeUpdatesProcessor] (vert.x-worker-thread-3) [TraceID: ] Live reload total time: 1.286s 
+2026-06-15 23:22:06,143 INFO  [io.sma.rea.mes.kafka] (smallrye-kafka-consumer-thread-4) [TraceID: ] SRMSG18224: Executing consumer revoked re-balance listener for group 'quatrov-integrations'
+2026-06-15 23:22:55,036 TRACE [org.hib.orm.jdb.bind] (quarkus-virtual-thread-0) [TraceID: ] binding parameter (1:VARCHAR) <- [ab758b14-13e8-48dc-bd7c-7bc74d0e1f2e]
+2026-06-15 23:22:55,038 TRACE [org.hib.orm.jdb.bind] (quarkus-virtual-thread-0) [TraceID: ] binding parameter (1:VARCHAR) <- [c3f80876-1a73-4f9b-bc6b-359f13151043]
+2026-06-15 23:22:55,039 TRACE [org.hib.orm.jdb.bind] (quarkus-virtual-thread-0) [TraceID: ] binding parameter (2:VARCHAR) <- [Hambúrguer Artesanal Quatro V]
+2026-06-15 23:22:55,039 TRACE [org.hib.orm.jdb.bind] (quarkus-virtual-thread-0) [TraceID: ] binding parameter (3:VARCHAR) <- [RECEBIDO]
+2026-06-15 23:22:55,040 TRACE [org.hib.orm.jdb.bind] (quarkus-virtual-thread-0) [TraceID: ] binding parameter (4:NUMERIC) <- [45.90]
+2026-06-15 23:22:55,040 TRACE [org.hib.orm.jdb.bind] (quarkus-virtual-thread-0) [TraceID: ] binding parameter (5:VARCHAR) <- [ab758b14-13e8-48dc-bd7c-7bc74d0e1f2e]
+2026-06-15 23:22:56,057 INFO  [io.sma.rea.mes.kafka] (vert.x-eventloop-thread-2) [TraceID: ] SRMSG18256: Initialize record store for topic-partition 'pedido-status-0' at position 3.
+2026-06-15 23:22:56,061 INFO  [org.spa.stu.qua.int.mes.inb.PedidoStatusConsumer] (vert.x-worker-thread-5) [TraceID: asnc-d02d] 🎰 [KAFKA AUDIT] Evento capturado no tópico 'pedido-status' -> ID: ab758b14-13e8-48dc-bd7c-7bc74d0e1f2e | Novo Status: RECEBIDO
+2026-06-15 23:23:45,480 INFO  [org.spa.stu.qua.int.res.ped.PedidoResource] (executor-thread-4) [TraceID: ] Atualizando status do pedido ab758b14-13e8-48dc-bd7c-7bc74d0e1f2e
+2026-06-15 23:23:45,481 TRACE [org.hib.orm.jdb.bind] (executor-thread-4) [TraceID: ] binding parameter (1:VARCHAR) <- [ab758b14-13e8-48dc-bd7c-7bc74d0e1f2e]
+2026-06-15 23:23:45,483 TRACE [org.hib.orm.jdb.bind] (executor-thread-4) [TraceID: ] binding parameter (1:VARCHAR) <- [db6c2348-fc81-4eab-9886-d02eef39e4e3]
+2026-06-15 23:23:45,484 TRACE [org.hib.orm.jdb.bind] (executor-thread-4) [TraceID: ] binding parameter (1:VARCHAR) <- [c3f80876-1a73-4f9b-bc6b-359f13151043]
+2026-06-15 23:23:45,484 TRACE [org.hib.orm.jdb.bind] (executor-thread-4) [TraceID: ] binding parameter (2:VARCHAR) <- [Hambúrguer Artesanal Quatro V]
+2026-06-15 23:23:45,485 TRACE [org.hib.orm.jdb.bind] (executor-thread-4) [TraceID: ] binding parameter (3:VARCHAR) <- [PAGO]
+2026-06-15 23:23:45,485 TRACE [org.hib.orm.jdb.bind] (executor-thread-4) [TraceID: ] binding parameter (4:NUMERIC) <- [45.90]
+2026-06-15 23:23:45,485 TRACE [org.hib.orm.jdb.bind] (executor-thread-4) [TraceID: ] binding parameter (5:VARCHAR) <- [db6c2348-fc81-4eab-9886-d02eef39e4e3]
+2026-06-15 23:23:45,494 INFO  [org.spa.stu.qua.int.mes.inb.PedidoStatusConsumer] (vert.x-worker-thread-5) [TraceID: asnc-37b2] 🎰 [KAFKA AUDIT] Evento capturado no tópico 'pedido-status' -> ID: db6c2348-fc81-4eab-9886-d02eef39e4e3 | Novo Status: PAGO
+2026-06-15 23:42:19,406 INFO  [io.sma.rea.mes.kafka] (smallrye-kafka-consumer-thread-4) [TraceID: ] SRMSG18224: Executing consumer revoked re-balance listener for group 'quatrov-integrations'
+2026-06-15 23:42:19,686 INFO  [io.sma.rea.mes.kafka] (smallrye-kafka-consumer-thread-5) [TraceID: ] SRMSG18224: Executing consumer revoked re-balance listener for group 'quatrov-integrations'
+2026-06-15 23:42:20,188 INFO  [io.quarkus] (Shutdown thread) [TraceID: ] quatrov-integrations stopped in 0.797s

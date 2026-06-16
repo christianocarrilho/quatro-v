@@ -15,12 +15,22 @@ public class Pedido {
     private final BigDecimal valor;
     private StatusPedido status;
 
-    public Pedido(String clienteId, String item, BigDecimal valor) {
-        this.id = UUID.randomUUID().toString();
+    public Pedido(String id, String clienteId, String item, BigDecimal valor, StatusPedido status) {
+        this.id = id;
         this.clienteId = clienteId;
         this.item = item;
         this.valor = valor;
-        this.status = StatusPedido.RECEBIDO;
+        this.status = status;
+    }
+
+    public static Pedido criarNovo(String clienteId, String item, BigDecimal valor) {
+        return new Pedido(
+            UUID.randomUUID().toString(),
+            clienteId,
+            item,
+            valor,
+            StatusPedido.RECEBIDO
+        );
     }
 
     public String getId() {

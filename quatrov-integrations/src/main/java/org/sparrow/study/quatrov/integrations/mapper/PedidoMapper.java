@@ -20,6 +20,11 @@ public interface PedidoMapper {
     @Mapping(target = "status", source = "status")
     PedidoEntity toEntity(Pedido dominio);
 
-    // Converte do Banco (JPA) de volta para o Domínio se você precisar consultar
+    // Força o MapStruct a usar o construtor completo mapeando os nomes dos parâmetros
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "clienteId", source = "clienteId")
+    @Mapping(target = "item", source = "item")
+    @Mapping(target = "valor", source = "valor")
+    @Mapping(target = "status", source = "status") 
     Pedido toDomain(PedidoEntity entity);
 }

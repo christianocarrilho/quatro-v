@@ -11,6 +11,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.UUID;
+import org.jboss.logging.Logger;
+import org.sparrow.study.quatrov.integrations.handler.exception.BusinessValidationHandler;
 import org.sparrow.study.quatrov.usecase.pedido.AtualizarStatusPedidoUseCase;
 import org.sparrow.study.quatrov.usecase.pedido.CriarPedidoUseCase;
 import org.sparrow.study.quatrov.usecase.pedido.dto.PedidoDTO;
@@ -24,6 +26,8 @@ import org.sparrow.study.quatrov.usecase.pedido.request.AtualizarStatusRequest;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class PedidoResource {
+
+    private static final Logger LOG = Logger.getLogger(PedidoResource.class);
 
     @Inject
     CriarPedidoUseCase criarPedidoUseCase;
@@ -48,6 +52,8 @@ public class PedidoResource {
     @Path("/{id}/status")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response atualizarStatus(@PathParam("id") UUID id, AtualizarStatusRequest request) {
+
+        LOG.infof("Atualizando status do pedido %s", id);
 
         atualizarStatusUseCase.processarAlteracaoStatus(id, request.status());
         return Response.noContent().build();

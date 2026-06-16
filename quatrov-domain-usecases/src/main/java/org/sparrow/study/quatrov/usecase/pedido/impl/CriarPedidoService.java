@@ -24,10 +24,10 @@ public class CriarPedidoService implements CriarPedidoUseCase {
     @Override
     public PedidoDTO executar(String clienteId, String item, java.math.BigDecimal valor) {
 
-        Pedido novoPedido = new Pedido(clienteId, item, valor);
+        Pedido novoPedido = Pedido.criarNovo(clienteId, item, valor);
 
         // grava no H2
-        repositoryPort.salvar(novoPedido);
+        repositoryPort.incluir(novoPedido);
 
         // envia para Kafka
         eventPublisher.publicar(novoPedido);

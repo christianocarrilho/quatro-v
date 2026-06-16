@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 import org.sparrow.study.quatrov.core.domain.Pedido;
+import org.sparrow.study.quatrov.core.domain.StatusPedido;
 import org.sparrow.study.quatrov.integrations.mapper.PedidoMapper;
 import org.sparrow.study.quatrov.integrations.orm.entity.pedido.PedidoEntity;
 import org.sparrow.study.quatrov.integrations.orm.repository.pedido.PedidoPanacheRepository;
@@ -26,7 +27,7 @@ public class PedidoDatabaseAdapter implements PedidoRepository {
 
     @Override
     @Transactional
-    public void salvar(Pedido pedido) {
+    public void incluir(Pedido pedido) {
 
         // 1. Converte Domínio Puro -> Entidade Panache
         PedidoEntity entity = pedidoMapper.toEntity(pedido);
@@ -41,9 +42,27 @@ public class PedidoDatabaseAdapter implements PedidoRepository {
         PedidoEntity entity = panacheRepository.findById(id.toString());
         Pedido pedido = null;
 
-        if (entity == null) return Optional.ofNullable(pedido);
+        if (entity == null) {
+            return Optional.ofNullable(pedido);
+        }
         pedido = pedidoMapper.toDomain(entity);
 
         return Optional.of(pedido);
+    }
+
+    @Override
+    @Transactional
+    public Pedido atualizarStatus(UUID pedidoId, StatusPedido novoStatus) {
+
+        String id = pedidoId.toString();
+
+        PedidoEntity entityExistente = panacheRepository.findByIdOptional(id)
+                .orElseThrow(() -> new IllegalArgumentException("Pedido não encontrado: " + id));
+
+        Pedido pedido = pedidoMapper.toDomain(entityExistente);
+        pedido.mudarStatusPara(novoStatus);
+        entityExistente.setStatus(pedido.getStatus().toString());
+
+        return pedido;
     }
 }

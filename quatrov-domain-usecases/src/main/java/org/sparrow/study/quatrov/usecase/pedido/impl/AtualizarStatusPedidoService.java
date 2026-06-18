@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.sparrow.study.quatrov.core.domain.Pedido;
 import org.sparrow.study.quatrov.core.domain.StatusPedido;
 import org.sparrow.study.quatrov.usecase.pedido.AtualizarStatusPedidoUseCase;
-import org.sparrow.study.quatrov.usecase.pedido.PedidoEventPublisher;
 import org.sparrow.study.quatrov.usecase.pedido.PedidoRepository;
 
 /**
@@ -19,13 +18,12 @@ public class AtualizarStatusPedidoService implements AtualizarStatusPedidoUseCas
     @Inject
     PedidoRepository pedidoRepository;
 
-    @Inject
-    PedidoEventPublisher pedidoEventPublisher;
-
     @Override
     public void processarAlteracaoStatus(UUID pedidoId, StatusPedido novoStatus) {
 
-        Pedido pedido = pedidoRepository.atualizarStatus(pedidoId, novoStatus);
-        pedidoEventPublisher.publicar(pedido);
+        Pedido pedido = pedidoRepository.buscarPorId(pedidoId);
+        if (pedido.getStatus().podeTransicionarPara(novoStatus)) {
+            pedidoRepository.atualizarStatus(pedidoId, novoStatus);
+        }
     }
 }

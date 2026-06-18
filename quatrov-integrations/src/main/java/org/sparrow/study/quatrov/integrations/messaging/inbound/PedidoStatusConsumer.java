@@ -1,10 +1,13 @@
 package org.sparrow.study.quatrov.integrations.messaging.inbound;
 
+import org.sparrow.study.quatrov.integrations.messaging.inbound.dto.PedidoRecord;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.util.UUID;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
-import org.jboss.logging.Logger;
-import org.jboss.logging.MDC;
+import org.sparrow.study.quatrov.core.domain.StatusPedido;
+import org.sparrow.study.quatrov.integrations.logging.V4Logger;
+import org.sparrow.study.quatrov.usecase.pedido.AtualizarStatusPedidoUseCase;
 
 /**
  *
@@ -13,18 +16,20 @@ import org.jboss.logging.MDC;
 @ApplicationScoped
 public class PedidoStatusConsumer {
 
-    private static final Logger LOG = Logger.getLogger(PedidoStatusConsumer.class);
+    @Inject
+    AtualizarStatusPedidoUseCase atualizarStatusUseCase;
+
+    @Inject
+    V4Logger LOG;
 
     @Incoming("pedido-status-in") // Escuta o canal novo de transições
     public void consumirMudancaStatus(PedidoRecord record) {
 
-        // Gera o Trace ID assíncrono para o Loki pegar
-        String asyncTraceId = "asnc-" + UUID.randomUUID().toString().substring(0, 4);
-        MDC.put("traceId", asyncTraceId);
+        LOG.info(record, "🎰 [KAFKA] Evento de alteração de status do pedido %s", record.id());
 
-        LOG.infof("🎰 [KAFKA AUDIT] Evento capturado no tópico 'pedido-status' -> ID: %s | Novo Status: %s",
-                record.id(), record.status());
+        UUID pedidoId = UUID.fromString(record.id());
+        StatusPedido novoStatus = StatusPedido.valueOf(record.status());
 
-        MDC.clear();
+        atualizarStatusUseCase.processarAlteracaoStatus(pedidoId, novoStatus);
     }
 }

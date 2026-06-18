@@ -8,9 +8,24 @@
     </parent>
     <artifactId>quatrov-domain-core</artifactId>
     <packaging>jar</packaging>
+    <name>quatrov-domain-core</name>
     <properties></properties>
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler-plugin.version}</version>
+                <configuration>
+                    <parameters>true</parameters>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${org.mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>io.smallrye</groupId>
                 <artifactId>jandex-maven-plugin</artifactId>
@@ -26,5 +41,4 @@
             </plugin>
         </plugins>
     </build>
-    <name>quatrov-domain-core</name>
 </project>

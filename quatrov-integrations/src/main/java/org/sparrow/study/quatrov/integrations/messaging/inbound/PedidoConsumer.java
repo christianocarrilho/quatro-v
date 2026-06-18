@@ -1,5 +1,6 @@
 package org.sparrow.study.quatrov.integrations.messaging.inbound;
 
+import org.sparrow.study.quatrov.integrations.messaging.inbound.dto.PedidoRecord;
 import io.smallrye.common.annotation.RunOnVirtualThread;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.eclipse.microprofile.reactive.messaging.Incoming;

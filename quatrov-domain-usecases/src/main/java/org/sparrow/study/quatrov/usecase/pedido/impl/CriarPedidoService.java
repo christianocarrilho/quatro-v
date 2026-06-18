@@ -3,6 +3,7 @@ package org.sparrow.study.quatrov.usecase.pedido.impl;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.sparrow.study.quatrov.core.domain.Pedido;
+import org.sparrow.study.quatrov.usecase.mapper.PedidoUseCaseMapper;
 import org.sparrow.study.quatrov.usecase.pedido.PedidoEventPublisher;
 import org.sparrow.study.quatrov.usecase.pedido.CriarPedidoUseCase;
 import org.sparrow.study.quatrov.usecase.pedido.PedidoRepository;
@@ -21,6 +22,9 @@ public class CriarPedidoService implements CriarPedidoUseCase {
     @Inject
     PedidoEventPublisher eventPublisher;
 
+    @Inject
+    PedidoUseCaseMapper mapper;
+
     @Override
     public PedidoDTO executar(String clienteId, String item, java.math.BigDecimal valor) {
 
@@ -32,6 +36,6 @@ public class CriarPedidoService implements CriarPedidoUseCase {
         // envia para Kafka
         eventPublisher.publicar(novoPedido);
 
-        return PedidoDTO.toDto(novoPedido);
+        return mapper.toDTO(novoPedido);
     }
 }

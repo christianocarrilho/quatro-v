@@ -1,16 +1,17 @@
 package org.sparrow.study.quatrov.integrations.orm.repository.adapter.pedido;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.control.ActivateRequestContext;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import java.util.Optional;
 import java.util.UUID;
 import org.sparrow.study.quatrov.core.domain.Pedido;
 import org.sparrow.study.quatrov.core.domain.StatusPedido;
-import org.sparrow.study.quatrov.integrations.mapper.PedidoMapper;
+import org.sparrow.study.quatrov.integrations.logging.V4Logger;
 import org.sparrow.study.quatrov.integrations.orm.entity.pedido.PedidoEntity;
 import org.sparrow.study.quatrov.integrations.orm.repository.pedido.PedidoPanacheRepository;
 import org.sparrow.study.quatrov.usecase.pedido.PedidoRepository;
+import org.sparrow.study.quatrov.integrations.mapper.PedidoDbMapper;
 
 /**
  *
@@ -20,10 +21,13 @@ import org.sparrow.study.quatrov.usecase.pedido.PedidoRepository;
 public class PedidoDatabaseAdapter implements PedidoRepository {
 
     @Inject
-    PedidoPanacheRepository panacheRepository;
+    PedidoPanacheRepository repository;
 
     @Inject
-    PedidoMapper pedidoMapper;
+    PedidoDbMapper pedidoMapper;
+
+    @Inject
+    V4Logger LOGGER;
 
     @Override
     @Transactional
@@ -33,36 +37,32 @@ public class PedidoDatabaseAdapter implements PedidoRepository {
         PedidoEntity entity = pedidoMapper.toEntity(pedido);
 
         // 2. Salva usando o poder do Panache
-        panacheRepository.persist(entity);
+        repository.persist(entity);
     }
 
     @Override
-    public Optional<Pedido> buscarPorId(UUID id) {
+    @ActivateRequestContext
+    public Pedido buscarPorId(UUID id) {
 
-        PedidoEntity entity = panacheRepository.findById(id.toString());
-        Pedido pedido = null;
-
-        if (entity == null) {
-            return Optional.ofNullable(pedido);
-        }
-        pedido = pedidoMapper.toDomain(entity);
-
-        return Optional.of(pedido);
+        PedidoEntity entity = getPedidoEntityById(id);
+        return pedidoMapper.toDomain(entity);
     }
 
     @Override
     @Transactional
-    public Pedido atualizarStatus(UUID pedidoId, StatusPedido novoStatus) {
+    public void atualizarStatus(UUID pedidoId, StatusPedido novoStatus) {
 
-        String id = pedidoId.toString();
+        repository.getEntityManager()
+                .createNativeQuery("UPDATE PEDIDOS SET status = :status WHERE id = :pedidoId")
+                .setParameter("status", novoStatus.name())
+                .setParameter("pedidoId", pedidoId.toString())
+                .executeUpdate();
 
-        PedidoEntity entityExistente = panacheRepository.findByIdOptional(id)
+        LOGGER.info("Status do pedido %s para %s", pedidoId.toString(), novoStatus);
+    }
+
+    private PedidoEntity getPedidoEntityById(UUID id) {
+        return repository.findByIdOptional(id.toString())
                 .orElseThrow(() -> new IllegalArgumentException("Pedido não encontrado: " + id));
-
-        Pedido pedido = pedidoMapper.toDomain(entityExistente);
-        pedido.mudarStatusPara(novoStatus);
-        entityExistente.setStatus(pedido.getStatus().toString());
-
-        return pedido;
     }
 }

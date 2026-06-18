@@ -18,7 +18,7 @@ public enum StatusPedido {
 
     public boolean podeTransicionarPara(StatusPedido novoStatus) {
         return switch (this) {
-            case RECEBIDO -> Set.of(PAGO, CANCELADO).contains(novoStatus);
+            case RECEBIDO -> Set.of(RECEBIDO, PAGO, CANCELADO).contains(novoStatus);
             case PAGO -> Set.of(EM_PREPARACAO, CANCELADO).contains(novoStatus);
             case EM_PREPARACAO -> Set.of(PRONTO_PARA_ENTREGA, CANCELADO).contains(novoStatus);
             case PRONTO_PARA_ENTREGA -> Set.of(SAIU_PARA_ENTREGA, CANCELADO).contains(novoStatus);

@@ -1,6 +1,5 @@
 package org.sparrow.study.quatrov.usecase.pedido;
 
-import java.util.Optional;
 import java.util.UUID;
 import org.sparrow.study.quatrov.core.domain.Pedido;
 import org.sparrow.study.quatrov.core.domain.StatusPedido;
@@ -13,7 +12,7 @@ public interface PedidoRepository {
 
     void incluir(Pedido pedido);
 
-    Pedido atualizarStatus(UUID pedidoId, StatusPedido novoStatus);
+    void atualizarStatus(UUID pedidoId, StatusPedido novoStatus);
 
-    Optional<Pedido> buscarPorId(UUID id);
+    Pedido buscarPorId(UUID id);
 }

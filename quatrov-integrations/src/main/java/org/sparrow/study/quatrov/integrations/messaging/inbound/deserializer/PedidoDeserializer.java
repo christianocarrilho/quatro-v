@@ -1,7 +1,7 @@
 package org.sparrow.study.quatrov.integrations.messaging.inbound.deserializer;
 
 import io.quarkus.kafka.client.serialization.ObjectMapperDeserializer;
-import org.sparrow.study.quatrov.integrations.messaging.inbound.PedidoRecord;
+import org.sparrow.study.quatrov.integrations.messaging.inbound.dto.PedidoRecord;
 
 /**
  *

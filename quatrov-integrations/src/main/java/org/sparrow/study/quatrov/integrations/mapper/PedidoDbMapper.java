@@ -11,7 +11,7 @@ import org.sparrow.study.quatrov.integrations.orm.entity.pedido.PedidoEntity;
  * @author Christiano H Carrilho Lopes da Silva <csilva@detran.ms.gov.br>
  */
 @Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA)
-public interface PedidoMapper {
+public interface PedidoDbMapper {
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "clienteId", source = "clienteId")
@@ -20,7 +20,6 @@ public interface PedidoMapper {
     @Mapping(target = "status", source = "status")
     PedidoEntity toEntity(Pedido dominio);
 
-    // Força o MapStruct a usar o construtor completo mapeando os nomes dos parâmetros
     @Mapping(target = "id", source = "id")
     @Mapping(target = "clienteId", source = "clienteId")
     @Mapping(target = "item", source = "item")

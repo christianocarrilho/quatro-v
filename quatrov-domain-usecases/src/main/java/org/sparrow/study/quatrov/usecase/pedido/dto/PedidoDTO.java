@@ -2,7 +2,6 @@ package org.sparrow.study.quatrov.usecase.pedido.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import org.sparrow.study.quatrov.core.domain.Pedido;
 
 /**
  *
@@ -45,9 +44,5 @@ public class PedidoDTO implements Serializable {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
-    }
-
-    public static PedidoDTO toDto(Pedido pedido) {
-        return new PedidoDTO(pedido.getClienteId(), pedido.getItem(), pedido.getValor());
     }
 }

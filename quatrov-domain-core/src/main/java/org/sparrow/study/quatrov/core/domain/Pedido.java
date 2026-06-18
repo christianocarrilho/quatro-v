@@ -23,16 +23,6 @@ public class Pedido {
         this.status = status;
     }
 
-    public static Pedido criarNovo(String clienteId, String item, BigDecimal valor) {
-        return new Pedido(
-            UUID.randomUUID().toString(),
-            clienteId,
-            item,
-            valor,
-            StatusPedido.RECEBIDO
-        );
-    }
-
     public String getId() {
         return id;
     }
@@ -53,6 +43,27 @@ public class Pedido {
         return valor;
     }
 
+    /**
+     * 
+     * @param clienteId
+     * @param item
+     * @param valor
+     * @return 
+     */
+    public static Pedido criarNovo(String clienteId, String item, BigDecimal valor) {
+        return new Pedido(
+            UUID.randomUUID().toString(),
+            clienteId,
+            item,
+            valor,
+            StatusPedido.RECEBIDO
+        );
+    }
+
+    /**
+     * 
+     * @param novoStatus 
+     */
     public void mudarStatusPara(StatusPedido novoStatus) {
         if (!this.status.podeTransicionarPara(novoStatus)) {
             throw new IllegalStateException(
